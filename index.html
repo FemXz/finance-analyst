@@ -50,7 +50,7 @@
         header {
             background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
             color: var(--text-light);
-            padding: 25px 0;
+            padding: 20px 0;
             box-shadow: var(--shadow-lg);
             position: sticky;
             top: 0;
@@ -62,6 +62,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 30px;
         }
 
         .logo {
@@ -69,8 +70,9 @@
             font-weight: 700;
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
             letter-spacing: -0.5px;
+            flex-shrink: 0;
         }
 
         .logo-icon {
@@ -86,26 +88,38 @@
             box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
         }
 
+        /* Desktop Navigation */
         nav {
             display: flex;
-            gap: 40px;
+            gap: 35px;
+            align-items: center;
+            flex: 1;
+            justify-content: flex-end;
         }
 
         nav a {
             color: var(--text-light);
             text-decoration: none;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 500;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+            letter-spacing: 0.5px;
             transition: all 0.3s ease;
             position: relative;
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        nav a i {
+            font-size: 16px;
+            transition: all 0.3s ease;
         }
 
         nav a::after {
             content: '';
             position: absolute;
-            bottom: -5px;
+            bottom: 0;
             left: 0;
             width: 0;
             height: 2px;
@@ -113,10 +127,20 @@
             transition: width 0.3s ease;
         }
 
+        nav a:hover {
+            color: var(--primary);
+        }
+
         nav a:hover::after {
             width: 100%;
         }
 
+        nav a:hover i {
+            transform: translateY(-2px);
+            color: var(--primary);
+        }
+
+        /* Mobile Menu Toggle */
         .nav-toggle {
             display: none;
             background: none;
@@ -125,10 +149,87 @@
             font-size: 24px;
             cursor: pointer;
             transition: all 0.3s ease;
+            padding: 8px;
+            margin-left: auto;
+            flex-shrink: 0;
         }
 
         .nav-toggle:hover {
+            color: var(--primary);
             transform: scale(1.1);
+        }
+
+        .nav-toggle.active {
+            color: var(--primary);
+        }
+
+        /* Mobile Sidebar Navigation */
+        .nav-sidebar {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 280px;
+            height: 100vh;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            flex-direction: column;
+            padding: 80px 0 40px 0;
+            z-index: 99;
+            transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: -8px 0 32px rgba(0, 0, 0, 0.2);
+            overflow-y: auto;
+        }
+
+        .nav-sidebar.active {
+            right: 0;
+        }
+
+        .nav-sidebar a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            padding: 16px 30px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-left: 3px solid transparent;
+            position: relative;
+        }
+
+        .nav-sidebar a i {
+            font-size: 18px;
+            width: 24px;
+            text-align: center;
+            color: var(--primary);
+        }
+
+        .nav-sidebar a:hover {
+            background: rgba(212, 175, 55, 0.1);
+            border-left-color: var(--primary);
+            padding-left: 35px;
+        }
+
+        /* Mobile Overlay */
+        .nav-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 98;
+            transition: opacity 0.3s ease;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .nav-overlay.active {
+            display: block;
+            opacity: 1;
+            pointer-events: auto;
         }
 
         /* Hero Section */
@@ -360,56 +461,21 @@
             margin-top: 2px;
         }
 
-        /* Tables */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 40px 0;
-            box-shadow: var(--shadow);
-            border-radius: 12px;
-            overflow: hidden;
-        }
-
-        th {
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
-            color: var(--text-light);
-            padding: 20px;
-            text-align: left;
-            font-weight: 600;
-            font-size: 14px;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-        }
-
-        td {
-            padding: 18px 20px;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
-            font-size: 15px;
-        }
-
-        tr:hover {
-            background: rgba(212, 175, 55, 0.03);
-        }
-
-        tr:last-child td {
-            border-bottom: none;
-        }
-
         /* Stats Grid */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 25px;
             margin: 40px 0;
         }
 
         .stat-card {
-            background: linear-gradient(135deg, var(--primary) 0%, #e8c547 100%);
-            color: var(--accent);
+            background: white;
+            border: 1px solid rgba(212, 175, 55, 0.1);
             padding: 40px;
             border-radius: 12px;
             text-align: center;
-            box-shadow: var(--shadow-lg);
+            box-shadow: var(--shadow);
             transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
@@ -418,68 +484,35 @@
         .stat-card::before {
             content: '';
             position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200px;
-            height: 200px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary) 0%, transparent 100%);
         }
 
         .stat-card:hover {
             transform: translateY(-8px);
-            box-shadow: var(--shadow-xl);
-        }
-
-        .stat-icon {
-            font-size: 32px;
-            margin-bottom: 15px;
-            position: relative;
-            z-index: 1;
+            box-shadow: var(--shadow-lg);
         }
 
         .stat-number {
             font-family: 'Playfair Display', serif;
-            font-size: 42px;
+            font-size: 48px;
             font-weight: 800;
+            color: var(--primary);
             margin-bottom: 12px;
-            position: relative;
-            z-index: 1;
         }
 
         .stat-label {
-            font-size: 13px;
-            opacity: 0.9;
+            font-size: 14px;
+            color: #666;
             font-weight: 500;
             letter-spacing: 0.5px;
             text-transform: uppercase;
-            position: relative;
-            z-index: 1;
         }
 
-        .stat-card.secondary {
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
-            color: var(--text-light);
-        }
-
-        .stat-card.danger {
-            background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
-            color: white;
-        }
-
-        /* Lists */
-        ul, ol {
-            margin-left: 25px;
-            margin-bottom: 25px;
-        }
-
-        li {
-            margin-bottom: 14px;
-            line-height: 1.9;
-            font-size: 15px;
-        }
-
-        /* Comparison Section */
+        /* Comparison */
         .comparison {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -489,16 +522,16 @@
 
         .comparison-item {
             background: white;
-            border: 2px solid rgba(212, 175, 55, 0.2);
-            padding: 40px;
+            border: 2px solid rgba(212, 175, 55, 0.1);
             border-radius: 12px;
+            padding: 40px;
             text-align: center;
-            box-shadow: var(--shadow);
             transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
         }
 
         .comparison-item:hover {
-            box-shadow: var(--shadow-lg);
             transform: translateY(-6px);
         }
 
@@ -678,39 +711,39 @@
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+
+            nav {
+                gap: 25px;
+            }
+
+            nav a {
+                font-size: 13px;
+            }
         }
 
-        /* Responsive - Small Tablet */
+        /* Responsive - Small Tablet & Mobile */
         @media (max-width: 768px) {
             .container {
                 padding: 0 20px;
             }
 
             header .container {
-                flex-direction: column;
                 gap: 15px;
             }
 
+            /* Hide desktop nav, show mobile toggle */
             nav {
                 display: none;
-                flex-direction: column;
-                gap: 15px;
-                width: 100%;
-                background: rgba(0, 0, 0, 0.1);
-                padding: 20px;
-                border-radius: 8px;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-            }
-
-            nav.active {
-                display: flex;
             }
 
             .nav-toggle {
-                display: block;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .nav-sidebar {
+                display: flex;
             }
 
             .hero {
@@ -723,752 +756,4 @@
 
             .hero p {
                 font-size: 16px;
-            }
-
-            main {
-                padding: 40px 20px;
-            }
-
-            section {
-                margin-bottom: 60px;
-            }
-
-            section h2 {
-                font-size: 28px;
-                margin-bottom: 25px;
-            }
-
-            section h3 {
-                font-size: 22px;
-            }
-
-            .card {
-                padding: 25px;
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .stat-card {
-                padding: 30px;
-            }
-
-            .stat-number {
-                font-size: 36px;
-            }
-
-            .company-grid {
-                grid-template-columns: 1fr;
-            }
-
-            table {
-                font-size: 13px;
-            }
-
-            th, td {
-                padding: 12px;
-            }
-
-            footer {
-                padding: 40px 20px;
-            }
-        }
-
-        /* Responsive - Mobile 360px */
-        @media (max-width: 480px) {
-            :root {
-                font-size: 14px;
-            }
-
-            .container {
-                padding: 0 16px;
-            }
-
-            header {
-                padding: 16px 0;
-            }
-
-            .logo {
-                font-size: 20px;
-                gap: 10px;
-            }
-
-            .logo-icon {
-                width: 36px;
-                height: 36px;
-                font-size: 18px;
-            }
-
-            nav {
-                display: none;
-                flex-direction: column;
-                gap: 12px;
-                width: calc(100% + 32px);
-                margin-left: -16px;
-                margin-right: -16px;
-                background: rgba(0, 0, 0, 0.1);
-                padding: 16px;
-                border-radius: 0;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                z-index: 1000;
-            }
-
-            nav.active {
-                display: flex;
-            }
-
-            nav a {
-                font-size: 12px;
-                padding: 10px;
-                text-align: center;
-            }
-
-            .nav-toggle {
-                display: block;
-                font-size: 20px;
-            }
-
-            .hero {
-                padding: 40px 16px;
-                background: linear-gradient(135deg, rgba(212, 175, 55, 0.08) 0%, rgba(45, 90, 61, 0.08) 100%);
-            }
-
-            .hero::before {
-                width: 400px;
-                height: 400px;
-                top: -30%;
-                right: -20%;
-            }
-
-            .hero h1 {
-                font-size: 24px;
-                margin-bottom: 16px;
-                line-height: 1.3;
-            }
-
-            .hero p {
-                font-size: 14px;
-                margin-bottom: 24px;
-                line-height: 1.6;
-            }
-
-            .cta-button {
-                padding: 12px 24px;
-                font-size: 12px;
-            }
-
-            main {
-                padding: 30px 16px;
-            }
-
-            section {
-                margin-bottom: 40px;
-            }
-
-            section h2 {
-                font-size: 22px;
-                margin-bottom: 20px;
-                padding-bottom: 15px;
-                gap: 10px;
-            }
-
-            section h2 i {
-                font-size: 28px;
-            }
-
-            section h2::after {
-                width: 60px;
-            }
-
-            section h3 {
-                font-size: 18px;
-                margin-top: 24px;
-                margin-bottom: 16px;
-                gap: 8px;
-            }
-
-            section h3 i {
-                font-size: 18px;
-            }
-
-            p {
-                margin-bottom: 14px;
-                font-size: 14px;
-                line-height: 1.7;
-            }
-
-            .card {
-                padding: 20px;
-                margin-bottom: 16px;
-                border-radius: 10px;
-            }
-
-            .highlight-box,
-            .warning-box,
-            .info-box {
-                padding: 20px;
-                margin: 20px 0;
-                gap: 12px;
-            }
-
-            .highlight-box i,
-            .warning-box i,
-            .info-box i {
-                font-size: 20px;
-            }
-
-            table {
-                margin: 24px 0;
-                font-size: 12px;
-            }
-
-            th, td {
-                padding: 10px 8px;
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr;
-                gap: 16px;
-                margin: 24px 0;
-            }
-
-            .stat-card {
-                padding: 24px;
-            }
-
-            .stat-icon {
-                font-size: 24px;
-                margin-bottom: 12px;
-            }
-
-            .stat-number {
-                font-size: 32px;
-                margin-bottom: 8px;
-            }
-
-            .stat-label {
-                font-size: 12px;
-            }
-
-            .comparison {
-                grid-template-columns: 1fr;
-                gap: 16px;
-                margin: 24px 0;
-            }
-
-            .comparison-item {
-                padding: 24px;
-                border-radius: 10px;
-            }
-
-            .comparison-icon {
-                font-size: 24px;
-                margin-bottom: 12px;
-            }
-
-            .comparison-title {
-                font-size: 18px;
-                margin-bottom: 12px;
-            }
-
-            .comparison-value {
-                font-size: 28px;
-                margin-bottom: 12px;
-            }
-
-            .company-grid {
-                grid-template-columns: 1fr;
-                gap: 16px;
-                margin: 24px 0;
-            }
-
-            .company-card {
-                padding: 20px;
-                border-radius: 10px;
-            }
-
-            .company-icon {
-                font-size: 24px;
-                margin-bottom: 10px;
-            }
-
-            .company-symbol {
-                font-size: 22px;
-                margin-bottom: 8px;
-            }
-
-            .company-name {
-                font-size: 13px;
-                margin-bottom: 8px;
-            }
-
-            .company-desc {
-                font-size: 12px;
-                line-height: 1.6;
-            }
-
-            ul, ol {
-                margin-left: 20px;
-                margin-bottom: 16px;
-            }
-
-            li {
-                margin-bottom: 10px;
-                font-size: 14px;
-                line-height: 1.7;
-            }
-
-            footer {
-                padding: 30px 16px;
-                margin-top: 60px;
-            }
-
-            footer p {
-                font-size: 13px;
-                margin-bottom: 10px;
-            }
-
-            .footer-links {
-                margin-top: 20px;
-                gap: 12px;
-            }
-
-            .footer-links a {
-                font-size: 11px;
-            }
-        }
-
-        /* Responsive - Extra Small (Below 360px) */
-        @media (max-width: 360px) {
-            .container {
-                padding: 0 12px;
-            }
-
-            .logo {
-                font-size: 18px;
-            }
-
-            section h2 {
-                font-size: 20px;
-            }
-
-            .hero h1 {
-                font-size: 22px;
-            }
-
-            .stat-number {
-                font-size: 28px;
-            }
-
-            .comparison-value {
-                font-size: 24px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <div class="logo">
-                <span>femm Research</span>
-            </div>
-            <button class="nav-toggle" id="navToggle">
-                <i class="fas fa-bars"></i>
-            </button>
-            <nav id="navMenu">
-                <a href="#cash-paradigm"><i class="fas fa-money-bill-wave"></i> Paradigma Cash</a>
-                <a href="#market-stats"><i class="fas fa-chart-line"></i> Statistik Pasar</a>
-                <a href="#bitcoin"><i class="fas fa-bitcoin"></i> Bitcoin & Emas</a>
-                <a href="#defense"><i class="fas fa-shield-alt"></i> Sektor Pertahanan</a>
-                <a href="#recommendation"><i class="fas fa-lightbulb"></i> Rekomendasi</a>
-            </nav>
-        </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <h1><i class="fas fa-chart-pie"></i> Strategi Investasi Cerdas di Tengah Krisis Geopolitik</h1>
-            <p>Panduan komprehensif untuk memahami dinamika pasar keuangan dan mengalokasikan aset dengan bijak saat terjadi ketegangan global.</p>
-            <a href="#cash-paradigm" class="cta-button"><i class="fas fa-arrow-down"></i> Mulai Baca</a>
-        </div>
-    </section>
-
-    <!-- Main Content -->
-    <main>
-        <div class="container">
-            <!-- Section 1: Cash Paradigm -->
-            <section id="cash-paradigm">
-                <h2><i class="fas fa-exclamation-circle"></i> Paradigma "Cash is Trash" dalam Krisis Geopolitik</h2>
-                
-                <p>Dalam periode ketegangan geopolitik, seperti konflik antara Amerika Serikat dan Iran atau Rusia dan Ukraina, pemerintah di seluruh dunia cenderung meningkatkan pengeluaran militer secara signifikan. Untuk membiayai kebutuhan ini, bank sentral sering kali meningkatkan pasokan uang (M2) melalui pencetakan uang baru.</p>
-
-                <div class="highlight-box">
-                    <i class="fas fa-lightbulb"></i>
-                    <div>
-                        <strong>Poin Kunci:</strong> Fenomena ini secara langsung memicu inflasi yang agresif, yang pada gilirannya menggerus daya beli mata uang fiat seperti Rupiah atau Dolar. Menyimpan kekayaan dalam bentuk uang tunai dalam jangka panjang selama masa krisis dianggap sebagai strategi yang berisiko tinggi.
-                    </div>
-                </div>
-
-                <h3><i class="fas fa-question-circle"></i> Mengapa Uang Tunai Kehilangan Nilai?</h3>
-                <ul>
-                    <li><i class="fas fa-check-circle" style="color: var(--primary); margin-right: 8px;"></i><strong>Pencetakan Uang Masif:</strong> Negara mencetak uang untuk membiayai pengeluaran militer</li>
-                    <li><i class="fas fa-check-circle" style="color: var(--primary); margin-right: 8px;"></i><strong>Inflasi Meningkat:</strong> Pasokan uang yang meningkat menyebabkan harga barang naik</li>
-                    <li><i class="fas fa-check-circle" style="color: var(--primary); margin-right: 8px;"></i><strong>Daya Beli Turun:</strong> Uang tunai yang Anda simpan nilainya terus berkurang setiap tahunnya</li>
-                    <li><i class="fas fa-check-circle" style="color: var(--primary); margin-right: 8px;"></i><strong>Aset Produktif Lebih Baik:</strong> Berinvestasi di aset yang memberikan return lebih menguntungkan</li>
-                </ul>
-
-                <div class="info-box">
-                    <i class="fas fa-chart-bar"></i>
-                    <div>
-                        <strong>Rekomendasi Warren Buffett:</strong> Investor sebaiknya beralih ke aset produktif atau "hard assets" daripada menyimpan uang tunai yang nilainya terus tergerus.
-                    </div>
-                </div>
-            </section>
-
-            <!-- Section 2: Market Statistics -->
-            <section id="market-stats">
-                <h2><i class="fas fa-chart-line"></i> Statistik Performa Pasar: Bull vs. Bear Market</h2>
-                
-                <p>Memahami siklus pasar sangat penting bagi investor untuk tetap tenang di tengah volatilitas. Data historis menunjukkan bahwa pasar saham cenderung memiliki fase pertumbuhan yang jauh lebih lama dan lebih kuat dibandingkan fase penurunannya.</p>
-
-                <h3><i class="fas fa-balance-scale"></i> Perbandingan Bull vs Bear Market (S&P 500)</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th><i class="fas fa-info-circle"></i> Karakteristik Pasar</th>
-                            <th><i class="fas fa-arrow-up"></i> Bull Market</th>
-                            <th><i class="fas fa-arrow-down"></i> Bear Market</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Rata-rata Durasi</strong></td>
-                            <td>4,9 hingga 5,3 Tahun</td>
-                            <td>1,1 hingga 1,5 Tahun</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Rata-rata Imbal Hasil</strong></td>
-                            <td>+177% hingga +254%</td>
-                            <td>-31%</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Probabilitas Jangka Panjang</strong></td>
-                            <td>Dominan (Pertumbuhan Positif)</td>
-                            <td>Koreksi Sementara</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-icon"><i class="fas fa-calendar"></i></div>
-                        <div class="stat-number">5 Tahun</div>
-                        <div class="stat-label">Rata-rata Bull Market</div>
-                    </div>
-                    <div class="stat-card secondary">
-                        <div class="stat-icon"><i class="fas fa-arrow-up"></i></div>
-                        <div class="stat-number">+250%</div>
-                        <div class="stat-label">Rata-rata Return Bull</div>
-                    </div>
-                    <div class="stat-card danger">
-                        <div class="stat-icon"><i class="fas fa-calendar"></i></div>
-                        <div class="stat-number">1 Tahun</div>
-                        <div class="stat-label">Rata-rata Bear Market</div>
-                    </div>
-                </div>
-
-                <h3><i class="fas fa-warning"></i> Risiko Market Timing</h3>
-                <div class="warning-box">
-                    <i class="fas fa-exclamation-triangle"></i>
-                    <div>
-                        <strong>Statistik Penting:</strong> Jika seorang investor melewatkan hanya <strong>20 hari terbaik</strong> di pasar saham dalam satu tahun, total imbal hasil tahunan mereka dapat berkurang hingga <strong>50%</strong>. Ini menunjukkan betapa pentingnya tetap berinvestasi dan tidak mencoba melakukan market timing.
-                    </div>
-                </div>
-
-                <h3><i class="fas fa-target"></i> Kesimpulan untuk Investor</h3>
-                <ul>
-                    <li><i class="fas fa-check-circle" style="color: var(--primary); margin-right: 8px;"></i>Pasar naik lebih lama daripada pasar turun (5 tahun vs 1 tahun)</li>
-                    <li><i class="fas fa-check-circle" style="color: var(--primary); margin-right: 8px;"></i>Return bull market jauh lebih besar dari kerugian bear market</li>
-                    <li><i class="fas fa-check-circle" style="color: var(--primary); margin-right: 8px;"></i>Jangan mencoba market timing - risiko melewatkan hari-hari terbaik terlalu besar</li>
-                    <li><i class="fas fa-check-circle" style="color: var(--primary); margin-right: 8px;"></i>Investasi jangka panjang (20+ tahun) memiliki probabilitas positif 100%</li>
-                </ul>
-            </section>
-
-            <!-- Section 3: Bitcoin & Gold -->
-            <section id="bitcoin">
-                <h2><i class="fas fa-bitcoin"></i> Bitcoin dan Emas sebagai Aset Lindung Nilai</h2>
-                
-                <p>Bitcoin (BTC) kini mulai diakui oleh institusi besar seperti BlackRock sebagai instrumen lindung nilai yang efektif terhadap ketidakpastian geopolitik. Berbeda dengan aset tradisional, Bitcoin memiliki pasokan yang terbatas secara algoritma (maksimal 21 juta unit) dan bersifat tahan terhadap sensor atau sanksi internasional.</p>
-
-                <h3><i class="fas fa-chart-area"></i> Performa Bitcoin Saat Krisis Geopolitik</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th><i class="fas fa-globe"></i> Peristiwa Geopolitik</th>
-                            <th><i class="fas fa-bitcoin"></i> Performa BTC</th>
-                            <th><i class="fas fa-hourglass"></i> Durasi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Eskalasi AS-Iran</td>
-                            <td style="color: var(--primary); font-weight: 700;">+17%</td>
-                            <td>10 Hari (Jan 2020)</td>
-                        </tr>
-                        <tr>
-                            <td>Krisis Perbankan AS</td>
-                            <td style="color: var(--primary); font-weight: 700;">+25%</td>
-                            <td>60 Hari (Feb 2023)</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <div class="comparison">
-                    <div class="comparison-item positive">
-                        <div class="comparison-icon"><i class="fas fa-bitcoin"></i></div>
-                        <div class="comparison-title">Bitcoin (Safe Haven Baru)</div>
-                        <div class="comparison-value">+17% - +25%</div>
-                        <p style="margin-bottom: 0;">Naik saat krisis geopolitik, tahan sensor, pasokan terbatas</p>
-                    </div>
-                    <div class="comparison-item negative">
-                        <div class="comparison-icon"><i class="fas fa-ring"></i></div>
-                        <div class="comparison-title">Emas (Safe Haven Tradisional)</div>
-                        <div class="comparison-value">Lambat Merespons</div>
-                        <p style="margin-bottom: 0;">Respons lebih lambat, dapat disita, tidak tahan sensor</p>
-                    </div>
-                </div>
-
-                <h3><i class="fas fa-star"></i> Keunggulan Bitcoin sebagai Aset Lindung Nilai</h3>
-                <ul>
-                    <li><i class="fas fa-check-circle" style="color: var(--primary); margin-right: 8px;"></i><strong>Pasokan Terbatas:</strong> Hanya 21 juta Bitcoin yang akan pernah ada - tidak bisa dicetak oleh siapapun</li>
-                    <li><i class="fas fa-check-circle" style="color: var(--primary); margin-right: 8px;"></i><strong>Tahan Sensor:</strong> Tidak bisa disita atau dibekukan oleh pemerintah</li>
-                    <li><i class="fas fa-check-circle" style="color: var(--primary); margin-right: 8px;"></i><strong>Tahan Sanksi:</strong> Tidak terpengaruh oleh sanksi ekonomi internasional</li>
-                    <li><i class="fas fa-check-circle" style="color: var(--primary); margin-right: 8px;"></i><strong>Respons Cepat:</strong> Merespons krisis geopolitik lebih cepat daripada emas</li>
-                    <li><i class="fas fa-check-circle" style="color: var(--primary); margin-right: 8px;"></i><strong>Diversifikasi:</strong> Aset yang tidak berkorelasi dengan saham tradisional</li>
-                </ul>
-
-                <div class="highlight-box">
-                    <i class="fas fa-search"></i>
-                    <div>
-                        <strong>Riset BlackRock:</strong> Data menunjukkan bahwa Bitcoin sering kali menunjukkan reaksi harga yang lebih lincah dan positif dibandingkan emas atau saham tradisional saat terjadi guncangan politik global, menjadikannya komponen diversifikasi yang menarik dalam portofolio modern.
-                    </div>
-                </div>
-            </section>
-
-            <!-- Section 4: Defense Sector -->
-            <section id="defense">
-                <h2><i class="fas fa-shield-alt"></i> Proyeksi Sektor Pertahanan Global</h2>
-                
-                <p>Seiring dengan meningkatnya ketegangan dunia, anggaran pertahanan global diprediksi akan terus melonjak. Anggaran militer Amerika Serikat sendiri diperkirakan akan mencapai angka fantastis sebesar <strong>$1,5 Triliun pada tahun 2027</strong>. Hal ini memberikan angin segar bagi perusahaan-perusahaan di sektor pertahanan yang memiliki kontrak jangka panjang dengan pemerintah.</p>
-
-                <div class="stat-card" style="text-align: center; margin: 40px 0;">
-                    <div class="stat-icon"><i class="fas fa-money-bill-wave"></i></div>
-                    <div class="stat-number">$1,5T</div>
-                    <div class="stat-label">Proyeksi Anggaran Militer AS 2027</div>
-                </div>
-
-                <h3><i class="fas fa-building"></i> Perusahaan Pertahanan Kunci (Defense Stocks)</h3>
-                
-                <div class="company-grid">
-                    <div class="company-card">
-                        <div class="company-icon"><i class="fas fa-fighter-jet"></i></div>
-                        <div class="company-symbol">LMT</div>
-                        <div class="company-name">Lockheed Martin</div>
-                        <div class="company-desc">Produsen utama pesawat tempur canggih seperti F-35 dan F-22. Kontrak jangka panjang dengan Pentagon.</div>
-                    </div>
-                    <div class="company-card">
-                        <div class="company-icon"><i class="fas fa-rocket"></i></div>
-                        <div class="company-symbol">RTX</div>
-                        <div class="company-name">Raytheon</div>
-                        <div class="company-desc">Pemimpin dalam teknologi sistem rudal dan pertahanan udara. Produk unggulan: Patriot Missile System.</div>
-                    </div>
-                    <div class="company-card">
-                        <div class="company-icon"><i class="fas fa-tank"></i></div>
-                        <div class="company-symbol">GD</div>
-                        <div class="company-name">General Dynamics</div>
-                        <div class="company-desc">Spesialis dalam kendaraan tempur darat dan sistem maritim. Pembuat tank M1 Abrams.</div>
-                    </div>
-                    <div class="company-card">
-                        <div class="company-icon"><i class="fas fa-fan"></i></div>
-                        <div class="company-symbol">GE</div>
-                        <div class="company-name">GE Aerospace</div>
-                        <div class="company-desc">Produsen mesin jet militer berkinerja tinggi untuk pesawat tempur modern.</div>
-                    </div>
-                </div>
-
-                <h3><i class="fas fa-lightbulb"></i> Mengapa Sektor Pertahanan Menarik?</h3>
-                <ul>
-                    <li><i class="fas fa-check-circle" style="color: var(--primary); margin-right: 8px;"></i><strong>Anggaran Meningkat:</strong> Proyeksi anggaran militer global terus naik</li>
-                    <li><i class="fas fa-check-circle" style="color: var(--primary); margin-right: 8px;"></i><strong>Kontrak Jangka Panjang:</strong> Perusahaan pertahanan memiliki kontrak multi-tahun yang stabil</li>
-                    <li><i class="fas fa-check-circle" style="color: var(--primary); margin-right: 8px;"></i><strong>Profit Margin Tinggi:</strong> Produk pertahanan memiliki margin keuntungan yang substansial</li>
-                    <li><i class="fas fa-check-circle" style="color: var(--primary); margin-right: 8px;"></i><strong>Demand Konsisten:</strong> Permintaan untuk teknologi pertahanan selalu ada</li>
-                    <li><i class="fas fa-check-circle" style="color: var(--primary); margin-right: 8px;"></i><strong>Geopolitik Mendukung:</strong> Ketegangan global meningkatkan permintaan</li>
-                </ul>
-
-                <div class="info-box">
-                    <i class="fas fa-chart-line"></i>
-                    <div>
-                        <strong>Peluang Investor:</strong> Dengan meningkatnya anggaran pertahanan global, saham-saham di sektor ini diprediksi akan terus mengalami pertumbuhan. Ini adalah salah satu cara untuk menangkap tren kenaikan pengeluaran militer global.
-                    </div>
-                </div>
-            </section>
-
-            <!-- Section 5: Recommendations -->
-            <section id="recommendation">
-                <h2><i class="fas fa-lightbulb"></i> Kesimpulan dan Rekomendasi Alokasi Aset</h2>
-                
-                <p>Investor yang bijak disarankan untuk tidak terjebak dalam kepanikan jangka pendek, melainkan fokus pada alokasi aset yang terdiversifikasi. Berikut adalah strategi alokasi yang direkomendasikan untuk menghadapi "Monetary Change" (perubahan sistem moneter dunia):</p>
-
-                <h3><i class="fas fa-chart-pie"></i> Strategi Alokasi Portofolio yang Bijak</h3>
-                
-                <div class="card">
-                    <h3 style="margin-top: 0; color: var(--primary-dark);"><i class="fas fa-wallet"></i> 1. Uang Tunai (Cash)</h3>
-                    <p><strong>Alokasi: 10-15% dari total aset</strong></p>
-                    <ul>
-                        <li><i class="fas fa-check-circle" style="color: var(--primary); margin-right: 8px;"></i>Gunakan untuk likuiditas harian dan transaksi</li>
-                        <li><i class="fas fa-check-circle" style="color: var(--primary); margin-right: 8px;"></i>Dana Darurat: 3-6 bulan biaya pengeluaran</li>
-                        <li><i class="fas fa-check-circle" style="color: var(--primary); margin-right: 8px;"></i>Memberikan ketenangan pikiran jika terjadi risiko pekerjaan</li>
-                    </ul>
-                </div>
-
-                <div class="card">
-                    <h3 style="margin-top: 0; color: var(--accent);"><i class="fas fa-chart-line"></i> 2. Aset Saham (Stocks)</h3>
-                    <p><strong>Alokasi: 50-60% dari total aset</strong></p>
-                    <ul>
-                        <li><i class="fas fa-check-circle" style="color: var(--primary); margin-right: 8px;"></i>S&P 500 atau IHSG untuk pertumbuhan jangka panjang</li>
-                        <li><i class="fas fa-check-circle" style="color: var(--primary); margin-right: 8px;"></i>Fokus pada diversifikasi sektor</li>
-                        <li><i class="fas fa-check-circle" style="color: var(--primary); margin-right: 8px;"></i>Investasi disiplin dengan rupiah cost averaging (DCA)</li>
-                        <li><i class="fas fa-check-circle" style="color: var(--primary); margin-right: 8px;"></i>Jangan mencoba market timing</li>
-                    </ul>
-                </div>
-
-                <div class="card">
-                    <h3 style="margin-top: 0; color: var(--primary-dark);"><i class="fas fa-coins"></i> 3. Bitcoin & Emas (Safe Haven Assets)</h3>
-                    <p><strong>Alokasi: 15-25% dari total aset</strong></p>
-                    <ul>
-                        <li><i class="fas fa-check-circle" style="color: var(--primary); margin-right: 8px;"></i>Bitcoin: 5-10% sebagai hedge terhadap devaluasi mata uang</li>
-                        <li><i class="fas fa-check-circle" style="color: var(--primary); margin-right: 8px;"></i>Emas: 5-10% untuk stabilitas portofolio</li>
-                        <li><i class="fas fa-check-circle" style="color: var(--primary); margin-right: 8px;"></i>Melindungi daya beli terhadap inflasi global</li>
-                    </ul>
-                </div>
-
-                <div class="card">
-                    <h3 style="margin-top: 0; color: #dc2626;"><i class="fas fa-shield-alt"></i> 4. Saham Sektor Pertahanan (Defense Stocks)</h3>
-                    <p><strong>Alokasi: 10-15% dari total aset</strong></p>
-                    <ul>
-                        <li><i class="fas fa-check-circle" style="color: var(--primary); margin-right: 8px;"></i>Manfaatkan tren kenaikan anggaran militer global</li>
-                        <li><i class="fas fa-check-circle" style="color: var(--primary); margin-right: 8px;"></i>Perusahaan kunci: LMT, RTX, GD, GE Aerospace</li>
-                        <li><i class="fas fa-check-circle" style="color: var(--primary); margin-right: 8px;"></i>Kontrak jangka panjang memberikan stabilitas</li>
-                    </ul>
-                </div>
-
-                <h3><i class="fas fa-pie-chart"></i> Contoh Alokasi Portofolio (Total: 100%)</h3>
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-icon"><i class="fas fa-wallet"></i></div>
-                        <div class="stat-number">15%</div>
-                        <div class="stat-label">Cash & Dana Darurat</div>
-                    </div>
-                    <div class="stat-card secondary">
-                        <div class="stat-icon"><i class="fas fa-chart-line"></i></div>
-                        <div class="stat-number">55%</div>
-                        <div class="stat-label">Saham (S&P 500/IHSG)</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon"><i class="fas fa-coins"></i></div>
-                        <div class="stat-number">20%</div>
-                        <div class="stat-label">Bitcoin & Emas</div>
-                    </div>
-                    <div class="stat-card danger">
-                        <div class="stat-icon"><i class="fas fa-shield-alt"></i></div>
-                        <div class="stat-number">10%</div>
-                        <div class="stat-label">Defense Stocks</div>
-                    </div>
-                </div>
-
-                <h3><i class="fas fa-rocket"></i> Prinsip Investasi Jangka Panjang</h3>
-                <div class="highlight-box">
-                    <i class="fas fa-check-circle"></i>
-                    <div>
-                        <strong>Prinsip Kunci untuk Sukses:</strong>
-                        <ul style="margin-top: 15px; margin-bottom: 0;">
-                            <li><i class="fas fa-check-circle" style="color: var(--primary); margin-right: 8px;"></i>Mulai berinvestasi sekarang, jangan menunggu "waktu yang tepat"</li>
-                            <li><i class="fas fa-check-circle" style="color: var(--primary); margin-right: 8px;"></i>Diversifikasi aset untuk mengurangi risiko</li>
-                            <li><i class="fas fa-check-circle" style="color: var(--primary); margin-right: 8px;"></i>Tetap disiplin dengan rupiah cost averaging (DCA)</li>
-                            <li><i class="fas fa-check-circle" style="color: var(--primary); margin-right: 8px;"></i>Jangan panik saat market turun - ini kesempatan membeli lebih murah</li>
-                            <li><i class="fas fa-check-circle" style="color: var(--primary); margin-right: 8px;"></i>Fokus pada tujuan jangka panjang (20+ tahun)</li>
-                            <li><i class="fas fa-check-circle" style="color: var(--primary); margin-right: 8px;"></i>Hindari market timing dan emotional trading</li>
-                            <li><i class="fas fa-check-circle" style="color: var(--primary); margin-right: 8px;"></i>Terus belajar dan update pengetahuan investasi</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Key Takeaways -->
-            <section>
-                <h2><i class="fas fa-bullseye"></i> Ringkasan Poin-Poin Penting</h2>
-                
-                <div class="card">
-                    <h3 style="margin-top: 0; color: var(--primary-dark);"><i class="fas fa-star"></i> Takeaway Utama</h3>
-                    <ol>
-                        <li><i class="fas fa-check-circle" style="color: var(--primary); margin-right: 8px;"></i><strong>Cash is Trash:</strong> Jangan simpan uang tunai berlebih - nilainya terus tergerus oleh inflasi</li>
-                        <li><i class="fas fa-check-circle" style="color: var(--primary); margin-right: 8px;"></i><strong>Bull Market Lebih Lama:</strong> Pasar naik rata-rata 5 tahun, turun hanya 1 tahun</li>
-                        <li><i class="fas fa-check-circle" style="color: var(--primary); margin-right: 8px;"></i><strong>Bitcoin Sebagai Safe Haven:</strong> Naik +17-25% saat krisis geopolitik</li>
-                        <li><i class="fas fa-check-circle" style="color: var(--primary); margin-right: 8px;"></i><strong>Sektor Pertahanan Berkembang:</strong> Anggaran militer global diprediksi $1,5 Triliun di 2027</li>
-                        <li><i class="fas fa-check-circle" style="color: var(--primary); margin-right: 8px;"></i><strong>Diversifikasi adalah Kunci:</strong> Alokasikan ke cash, saham, Bitcoin/emas, dan defense stocks</li>
-                        <li><i class="fas fa-check-circle" style="color: var(--primary); margin-right: 8px;"></i><strong>Jangan Market Timing:</strong> Melewatkan 20 hari terbaik bisa mengurangi return hingga 50%</li>
-                        <li><i class="fas fa-check-circle" style="color: var(--primary); margin-right: 8px;"></i><strong>Mulai Sekarang:</strong> Waktu terbaik untuk investasi adalah hari ini</li>
-                    </ol>
-                </div>
-            </section>
-        </div>
-    </main>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p><strong><i class="fas fa-chart-pie"></i> Panduan Investasi Cerdas: Strategi di Tengah Krisis Geopolitik</strong></p>
-            <p>Sumber: Analisis video YouTube tentang strategi investasi dan dinamika pasar keuangan global</p>
-            <p style="font-size: 13px; color: rgba(245, 245, 245, 0.7); margin-top: 20px;"><i class="fas fa-exclamation-circle"></i> Disclaimer: Informasi ini bersifat edukatif. Konsultasikan dengan financial advisor profesional sebelum membuat keputusan investasi.</p>
-            <div class="footer-links">
-                <a href="#cash-paradigm"><i class="fas fa-money-bill-wave"></i> Paradigma Cash</a>
-                <a href="#market-stats"><i class="fas fa-chart-line"></i> Statistik Pasar</a>
-                <a href="#bitcoin"><i class="fas fa-bitcoin"></i> Bitcoin & Emas</a>
-                <a href="#defense"><i class="fas fa-shield-alt"></i> Sektor Pertahanan</a>
-                <a href="#recommendation"><i class="fas fa-lightbulb"></i> Rekomendasi</a>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Mobile Navigation Toggle
-        const navToggle = document.getElementById('navToggle');
-        const navMenu = document.getElementById('navMenu');
-
-        navToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-        });
-
-        // Close menu when link is clicked
-        const navLinks = navMenu.querySelectorAll('a');
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-            });
-        });
-
-        // Close menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('header')) {
-                navMenu.classList.remove('active');
-            }
-        });
-    </script>
-</body>
-</html>
+    
